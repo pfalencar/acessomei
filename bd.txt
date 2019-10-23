@@ -1,0 +1,71 @@
+﻿create database login;
+use login;
+CREATE TABLE usuario (
+  usuario_id int not null auto_increment,
+  usuario varchar(200) not null,
+  senha varchar(32) not null,
+  primary key (usuario_id)
+);
+
+select * from usuario;
+
+insert into usuario (usuario, senha) values ('pat',md5('umdoistres'));
+
+select * from usuario;
+select * from usuario where usuario = 'pat' and senha = md5('umdoistres');
+
+//apaga os dados da tabela usuario:
+truncate usuario; 
+
+//insere colunas na tabela já existente:
+ALTER TABLE login.usuario  ADD COLUMN nome VARCHAR(100) NOT NULL  AFTER senha;
+ALTER TABLE login.usuario  ADD COLUMN data_cadastro DATETIME NOT NULL  AFTER nome;
+
+select count(*) as total from usuario where usuario = 'pat';
+//Resposta: 0. Porque não tem mais esse usuario na tabela.
+
+insert into usuario (usuario, senha, nome, data_cadastro) values ('pat',md5('um'),'Patricia', NOW());
+
+----------------------------------------------------------------------------------------------------------------------
+
+create database login;
+use login;
+CREATE TABLE usuario (
+  usuario_id int not null auto_increment,
+  usuario varchar(200) not null,
+  senha varchar(32) not null,
+  nome VARCHAR(100) NOT NULL,
+  data_cadastro DATETIME NOT NULL,
+  primary key (usuario_id)
+);
+
+select * from usuario;
+
+insert into usuario (usuario, senha, nome, data_cadastro) values ('pat',md5('um'),'Patricia', NOW());
+
+select * from usuario;
+
+ALTER TABLE usuario CHANGE usuario email VARCHAR(200) NOT NULL;
+
+
+ALTER TABLE usuario MODIFY COLUMN nome VARCHAR(100) NOT NULL AFTER usuario_id;
+
+insert into usuario (nome, email, senha, data_cadastro) values ('Pat','pat@gmail.com', md5('1'), NOW());
+
+====================================================================================================================
+
+create database login;
+use login;
+CREATE TABLE usuario (
+  usuario_id int not null auto_increment,
+  nome VARCHAR(100) NOT NULL,
+  email varchar(200) not null,
+  senha varchar(32) not null,  
+  data_cadastro DATETIME NOT NULL,
+  primary key (usuario_id)
+);
+
+insert into usuario (nome, email, senha, data_cadastro) values ('Pat','pat@gmail.com', md5('1'), NOW());
+
+select * from usuario;
+
